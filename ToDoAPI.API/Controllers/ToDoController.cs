@@ -23,10 +23,10 @@ namespace ToDoAPI.API.Controllers
                 ToDoId = t.ToDoId,
                 Action = t.Action,
                 Done = t.Done,
-                CategoryId = t.CategoryID,
+                CategoryId = t.CategoryId,
                 Category = new CategoryViewModel()
                 {
-                    CategoryId = t.Category.CategoryID,
+                    CategoryID = t.Category.CategoryID,
                     CategoryName = t.Category.CategoryName,
                     CategoryDescription = t.Category.CategoryDescription
                 }
@@ -53,7 +53,7 @@ namespace ToDoAPI.API.Controllers
                 CategoryId = t.CategoryId,
                 Category = new CategoryViewModel()
                 {
-                    CategoryId = t.Category.CategoryID,
+                    CategoryID = t.Category.CategoryID,
                     CategoryName = t.Category.CategoryName,
                     CategoryDescription = t.Category.CategoryDescription
                 }

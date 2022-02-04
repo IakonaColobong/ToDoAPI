@@ -21,7 +21,7 @@ namespace ToDoAPI.API.Models
     public class CategoryViewModel
     {
         [Key]
-        public int CategoryId { get; set; }
+        public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
     }
