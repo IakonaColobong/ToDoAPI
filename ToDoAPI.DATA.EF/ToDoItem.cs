@@ -17,7 +17,7 @@ namespace ToDoAPI.DATA.EF
         public int ToDoId { get; set; }
         public string Action { get; set; }
         public bool Done { get; set; }
-        public Nullable<int> CategoryId { get; set; }
+        public int CategoryId { get; set; }
     
         public virtual Category Category { get; set; }
     }
