@@ -34,6 +34,71 @@ namespace ToDoAPI.API.Controllers
 
         }//end categories
 
+        public IHttpActionResult PostCategory(CategoryViewModel cats)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid Data");
+            }
+            db.Categories.Add(new Category()
+            {
+                CategoryName = cats.CategoryName,
+                CategoryDescription = cats.CategoryDescription
 
-    }
-}
+
+            });
+            db.SaveChanges();
+            return Ok();
+        }//end post
+
+        public IHttpActionResult PutCategory(CategoryViewModel cats)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid Data");
+            }
+            Category existingCats = db.Categories.Where(c => c.CategoryID == cats.CategoryID).FirstOrDefault();
+            {
+                if (existingCats != null)
+                {
+                    existingCats.CategoryName = cats.CategoryName;
+                    existingCats.CategoryDescription = cats.CategoryDescription;
+                    db.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }//end if
+
+
+        }//end put
+        public IHttpActionResult DeleteCategroy(int id)
+        {
+            Category cats = db.Categories.Where(c => c.CategoryID == id).FirstOrDefault();
+
+            if (cats != null)
+            {
+                db.Categories.Remove(cats);
+                db.SaveChanges();
+                return Ok();
+            }
+
+            else
+            {
+                return NotFound();
+            }
+        }//end DeleteCategory
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+
+    }//end class
+}//end namespace
