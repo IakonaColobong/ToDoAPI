@@ -51,8 +51,8 @@ namespace ToDoAPI.API.Controllers
             return Ok(cat);
         }//end GetCategory
 
-        //step 6 -- Create functionality
-        //api/categories/ HttpPost
+        
+        
         public IHttpActionResult PostCategory(CategoryViewModel cat)
         {
             if (!ModelState.IsValid)
@@ -70,8 +70,7 @@ namespace ToDoAPI.API.Controllers
             return Ok();
         }//end Post
 
-        //STEP -- 7 
-        //api/Categories (HttpPut)
+        
         public IHttpActionResult PutCategory(CategoryViewModel cat)
         {
             if (!ModelState.IsValid)
@@ -97,8 +96,8 @@ namespace ToDoAPI.API.Controllers
         }//end putCategory
 
 
-        //STEP -- 8
-        //api/cetegories/id
+       
+        //api/categories/id
 
         public IHttpActionResult DeleteCategroy(int id)
         {
@@ -120,7 +119,7 @@ namespace ToDoAPI.API.Controllers
         }//end DeletCategory
 
 
-        //STEP -- 9
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
