@@ -86,19 +86,61 @@ namespace ToDoAPI.API.Controllers
 
         }//end post
 
-        //public IHttpActionResult PutCategory(CategoryViewModel cats)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Invalid Data");
-        //    }
-        //    Category exisitingCats = db.Categories.Where(c => c.CategoryID == cats.CategoryID).FirstOrDefault();
-        //    if (existingCats != null)
-        //    {
-        //        exisitingCats.CategoryName = cats.CategoryName;
-        //        exisitingCats.CategoryDescription = cats.CategoryDescription;
-        //    }
-        //}
+        //begin PUT aka EDIT
+        public IHttpActionResult PutToDoItem(ToDoViewModel toDoItem)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid Data");
+
+            ToDoItem existingToDoItem = db.ToDoItems.Where(r => r.ToDoId == toDoItem.ToDoId).FirstOrDefault();
+
+            if (existingToDoItem !=null)
+            {
+                existingToDoItem.ToDoId = toDoItem.ToDoId;
+                existingToDoItem.Action = toDoItem.Action;
+                existingToDoItem.Done = toDoItem.Done;
+                existingToDoItem.CategoryId = toDoItem.CategoryId;
+                db.SaveChanges();
+                return Ok();
+
+            }
+            else
+            {
+                return NotFound();
+            }
+        }//end PUT
+
+        //begin delete
+
+        public IHttpActionResult DeleteToDoItem(int id)
+        {
+            //get the resource
+            ToDoItem toDoItem = db.ToDoItems.Where(r => r.ToDoId == id).FirstOrDefault();
+
+            //if the resource is not null, delete the resource
+            if (toDoItem != null)
+            {
+                db.ToDoItems.Remove(toDoItem);
+                db.SaveChanges();
+                return Ok();
+            }
+            //if null - return NotFound()
+            else
+            {
+                return NotFound();
+            }
+        }//end DeletResource
+
+        //We use Dispose() below to dispose of any connections to the db after we are done with them - best practice to handle performance - dispose of instance of the controller and the instance of a db connection when we are done with it
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();//terminate the db object
+            }
+            //Below disposes of the instance of the controller
+            base.Dispose(disposing);
+        }
 
 
 
