@@ -18,7 +18,7 @@ namespace ToDoAPI.API.Controllers
         //getting all items in a table
         public IHttpActionResult GetToDo()
         {
-            List<ToDoViewModel> toDo = db.ToDoItems.Include("Category").Select(t => new ToDoViewModel()
+            List<ToDoViewModel> toDoItem = db.ToDoItems.Include("Category").Select(t => new ToDoViewModel()
             {
                 ToDoId = t.ToDoId,
                 Action = t.Action,
@@ -34,35 +34,36 @@ namespace ToDoAPI.API.Controllers
 
             }).ToList<ToDoViewModel>();
 
-            if (toDo.Count == 0)
+            if (toDoItem.Count == 0)
 
             {
                 return NotFound();
             }//end if
-            return Ok(toDo);
+            return Ok(toDoItem);
 
         }//end GetToDo
+
         //getting a singular item
-        public IHttpActionResult GetToDo(int id)
+        public IHttpActionResult GetToDoItem(int id)
         {
-            ToDoViewModel toDo = db.ToDoItems.Include("Category").Where(t => t.ToDoId == id).Select(t => new ToDoViewModel()
+            ToDoViewModel toDoItem = db.ToDoItems.Include("Category").Where(t => t.ToDoId == id).Select(t => new ToDoViewModel()
             {
                 ToDoId = t.ToDoId,
                 Action = t.Action,
                 Done = t.Done,
                 CategoryId = t.CategoryId,
-                //Category = new CategoryViewModel()
-                //{
-                //    CategoryId = t.Category.CategoryID,
-                //    CategoryName = t.Category.CategoryName,
-                //    CategoryDescription = t.Category.CategoryDescription
-                //}
+                Category = new CategoryViewModel()
+                {
+                   CategoryID = t.Category.CategoryID,
+                    CategoryName = t.Category.CategoryName,
+                   CategoryDescription = t.Category.CategoryDescription
+                }
             }).FirstOrDefault();
 
-            if (toDo == null)
+            if (toDoItem == null)
                 return NotFound();
 
-            return Ok(toDo);
+            return Ok(toDoItem);
 
 
         }//end GetResource

@@ -34,6 +34,26 @@ namespace ToDoAPI.API.Controllers
 
         }//end categories
 
+        //get single item by ID
+        public IHttpActionResult GetCategory(int id)
+        {
+            //Create the resource object and assign it to the results in the db
+            CategoryViewModel cat = db.Categories.Where(c => c.CategoryID == id).Select(c => new CategoryViewModel()
+            {
+                CategoryID = c.CategoryID,
+                CategoryName = c.CategoryName,
+                CategoryDescription = c.CategoryDescription
+            }).FirstOrDefault();
+
+            if (cat == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(cat);
+        }//end GetCategory
+
+
         public IHttpActionResult PostCategory(CategoryViewModel cats)
         {
             if (!ModelState.IsValid)
