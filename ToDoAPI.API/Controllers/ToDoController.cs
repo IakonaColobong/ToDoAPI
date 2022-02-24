@@ -86,6 +86,19 @@ namespace ToDoAPI.API.Controllers
 
         }//end post
 
+        //public IHttpActionResult PutCategory(CategoryViewModel cats)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Invalid Data");
+        //    }
+        //    Category exisitingCats = db.Categories.Where(c => c.CategoryID == cats.CategoryID).FirstOrDefault();
+        //    if (existingCats != null)
+        //    {
+        //        exisitingCats.CategoryName = cats.CategoryName;
+        //        exisitingCats.CategoryDescription = cats.CategoryDescription;
+        //    }
+        //}
 
 
 
